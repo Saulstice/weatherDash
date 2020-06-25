@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weather Dashboard</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+  <!-- Heading bar-->
+  <div id="head" class="d-flex justify-content-center">
+    <h1>Weather Dashboard</h1>
+  </div>
+
+  <!-- Search History Section -->
+
+  <div class="row">
+    <div id="aside" class="col-sm-3 ">
+      <form>
+        <h3 id="searchHead">Search for a City: </h3>
+        <div class="row">
+          <input id="pac-input" type="text" class="controls col-sm-7">
+          <button type="button" class="btn searchBtn btn-primary col-sm-3">Search</button>
+        </div>
+        <div id="searchHistory"></div>
+      </form>
+    </div>
+  </div>
+  <div class="col-sm offset-sm-4">
+    <div class="row" id="info">
+      <h2 id="cityName"></h2>
+    </div>
+    <div id="currentInfo">
+      <h5 id="temp0"></h5>
+      <h5 id="feels"></h5>
+      <h5 id="max"></h5>
+      <h5 id="min"></h5>
+      <h5 id="humid0"></h5>
+      <h5 id="wind0"></h5>
+      <h5 id="index0"></h5>
+      <hr>
+    </div>
+    <div class="row" id="dayCards">
+      
+    </div>
+
+  </div>
+  </div>
+
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script type="text/javascript"
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCyJX-Kt-KlymneRkWUnMjVk1KrA3bwCD0&libraries=places"></script>
+  <script src="moment.js"></script>
+  <script src="script.js"></script>
+
+</body>
+
+</html>

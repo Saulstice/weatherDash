@@ -1,0 +1,50 @@
+body{
+    font-family: 'Roboto', sans-serif;
+    background-color: rgb(145, 142, 142);
+}
+#head {
+    background-color:rgb(53, 53, 53);
+    color:white;
+    
+}
+
+.historyStuff {
+    padding-top: 40px;
+    background-color: rgb(145, 142, 142);
+    border-right: 1px solid white;
+}
+
+.sear {
+    padding-bottom: 5px;
+}
+
+.historyStuff {
+   position: absolute;
+   height: 100%;
+}
+
+.searchBtn {
+    height:37px;
+}
+
+.searchArea{
+    margin-bottom: 20px;
+}
+
+#info{
+  padding-top: 30px;
+}
+
+#aside {
+    position: absolute;
+    height: 100%;
+    border-right: 1px solid white;
+    margin-left:20px;
+}
+
+h2{
+    text-align: center;
+}
+#searchHistory {
+    padding-top: 30px;
+}
