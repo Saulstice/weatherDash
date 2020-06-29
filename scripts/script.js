@@ -4,25 +4,50 @@ var input = document.getElementById('pac-input');
 autocomplete = new google.maps.places.Autocomplete(input);
 
 
+
+
+getInfo(localStorage.getItem("Last"));
+
 $(".searchBtn").on("click", function (event) {
     event.preventDefault();
     $("#cityName").empty();
     $("#dayCards").empty();
-    
+  
     var searched = $("#pac-input").val();
-    var newHistory = $('<h5></h5>');
+    
+    localStorage.setItem("Last", searched);
+    
+    
+
+    var newHistory = $('<h5 class="his"></h5>');
     newHistory.text(searched);
-    $("#searchHistory").append(newHistory);
-    $("#searchHistory").append('<hr>');
+    $("#searchHistory").prepend(newHistory);
+    $("#searchHistory").prepend('<hr>');
     $("#cityName").append(searched);
 
-    if (location == "") {
+    if (searched == "") {
         alert("Enter location");
     } else {
-        var location = $("#pac-input").val();
+        getInfo(searched);
 
+    }
+    
+    $(".his").on("click", function () {
+        event.preventDefault();
+        var here = $(this).text();
+        getInfo(here);
+    });
+
+});
+
+
+
+function getInfo (place){
+    $("#cityName").empty();
+    $("#cityName").append(place);
+    $("#dayCards").empty();
         // take addresss and replace spaces with plus sign since this is the format google api requires
-        var address = location.split(' ').join('+');
+        var address = place.split(' ').join('+');
         var googleURL = "https://maps.googleapis.com/maps/api/geocode/json?address=" + address + "&key=AIzaSyCyJX-Kt-KlymneRkWUnMjVk1KrA3bwCD0";
 
         // Google maps ajax request
@@ -48,7 +73,7 @@ $(".searchBtn").on("click", function (event) {
                 url: weatherAPI,
                 method: "GET"
             }).then(function (response) {
-                console.log(response)
+                
 
                 var currentDate = moment.unix(response.dt).format("l");
                 console.log(currentDate);
@@ -57,23 +82,30 @@ $(".searchBtn").on("click", function (event) {
                 var name = response.name;
 
                 var temp = Math.round((response.main.temp - 273.15) * 9 / 5 + 32);
-                $("#temp0").text("Temperature: " + temp)
+                
+                $("#temp0").html("Temperature: " + "<button class='0 btn'>" +temp)
+                btnColor(temp, $(".0"));
 
                 var feelsLike = Math.round((response.main.feels_like - 273.15) * 9 / 5 + 32);
-                $("#feels").text("Feels like: " + feelsLike);
+                $("#feels").html("Feels like: " + "<button class='1 btn'>" +feelsLike);
+                btnColor(feelsLike, $(".1"));
 
                 var tempMax = Math.round((response.main.temp_max - 273.15) * 9 / 5 + 32);
-                $("#max").text("Max: " + tempMax);
+                $("#max").html("Max: " + "<button class='2 btn'>" +tempMax);
+                btnColor(tempMax, $(".2"));
 
                 var tempMin = Math.round((response.main.temp_min - 273.15) * 9 / 5 + 32);
-                $("#min").text("Min: " + tempMin);
+                $("#min").html("Min: " + "<button class='3 btn'>" + tempMin);
+                btnColor(tempMin, $(".3"));
 
                 var humidity = response.main.humidity;
-                $("#humid0").text("Humidity: " + humidity + "%");
+                $("#humid0").html("Humidity: " + humidity + "%");
 
                 var wind = response.wind.speed;
-                $("#wind0").text("Wind: " + wind + " mph");
-
+                $("#wind0").html("Wind: " + wind + " mph");
+              
+              console.log($(".0"));
+                
             });
 
             var forecastAPI = "https://cors-anywhere.herokuapp.com/api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + long + "&appid=b8a12898806019a6178b169c5ea6f245";
@@ -81,6 +113,7 @@ $(".searchBtn").on("click", function (event) {
                 url: forecastAPI,
                 method: "GET"
             }).then(function (response) {
+                $("#dayCards").empty();
                 console.log(response);
                 console.log(response.list[2]);
                 var dayOne =response.list[2]
@@ -97,7 +130,7 @@ $(".searchBtn").on("click", function (event) {
                 console.log(response.list[34]);
                 var dayFive = response.list[34];
                 var days = [dayOne, dayTwo, dayThree, dayFour, dayFive];
-
+                $("#dayCards").empty();
                 $.each(days, function (index, value) {
                     var currentDate = moment.unix(days[index].dt).format("l");
                     var temp = Math.round((days[index].main.temp - 273.15) * 9 / 5 + 32);
@@ -124,7 +157,15 @@ $(".searchBtn").on("click", function (event) {
             });
         });
 
+}
 
+function btnColor(num, select){
+    if (num>=80){
+        var btnColor = "btn-danger";
+    } else if (60<num<80){
+        btnColor = "btn-warning";
+    }else if (num<60){
+        btnColor = "btn-primary";
     }
-
-});
+    select.addClass(btnColor);
+}

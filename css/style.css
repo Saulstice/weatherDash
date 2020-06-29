@@ -36,10 +36,22 @@ body{
 }
 
 #aside {
-    position: absolute;
-    height: 100%;
-    border-right: 1px solid white;
-    margin-left:20px;
+    padding-left:30px;
+    
+}
+
+#searchHistory{
+    height: 20vw;
+    max-height: 20vw;
+    overflow: scroll;
+    padding-left: 10px;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+#currentInfo{
+    font-size: 20px;
 }
 
 h2{
