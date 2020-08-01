@@ -6,7 +6,7 @@ autocomplete = new google.maps.places.Autocomplete(input);
 
 
 
-getInfo(localStorage.getItem("Last"));
+// getInfo(localStorage.getItem("Last"));
 
 $(".searchBtn").on("click", function (event) {
     event.preventDefault();
